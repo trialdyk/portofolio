@@ -122,8 +122,6 @@ onMounted(() => {
             Throughout my journey, I've explored various technologies and roles in software development.
           </p>
 
-          <hr />
-
           <!-- What I Do Section -->
           <section id="roles" class="scroll-mt-24">
             <h2 class="text-xl font-bold text-slate-800 dark:text-slate-200 mb-2">What I Do</h2>
@@ -157,8 +155,6 @@ onMounted(() => {
             </div>
           </section>
 
-          <hr />
-
           <!-- Tech Stack Section -->
           <section id="tech-stack" class="scroll-mt-24">
             <h2 class="text-xl font-bold text-slate-800 dark:text-slate-200 mb-2">Tech Stack</h2>
@@ -190,8 +186,6 @@ onMounted(() => {
               </div>
             </div>
           </section>
-
-          <hr />
 
           <!-- Detail and Summary Section -->
           <section id="detail" class="scroll-mt-24">
