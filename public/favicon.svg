@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <!-- Terminal window frame -->
+  <rect x="10" y="15" width="80" height="70" rx="8" stroke="#6366F1" stroke-width="4" fill="none"/>
+  
+  <!-- Terminal top bar -->
+  <rect x="10" y="15" width="80" height="16" rx="8" fill="#6366F1"/>
+  <rect x="10" y="23" width="80" height="8" fill="#6366F1"/>
+  
+  <!-- Window buttons -->
+  <circle cx="22" cy="23" r="3" fill="#1e1b4b"/>
+  <circle cx="32" cy="23" r="3" fill="#1e1b4b"/>
+  <circle cx="42" cy="23" r="3" fill="#1e1b4b"/>
+  
+  <!-- Terminal prompt > shaped like A hint -->
+  <path d="M25 50L38 60L25 70" stroke="#6366F1" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Cursor line (looks like part of A) -->
+  <path d="M45 68H70" stroke="#818CF8" stroke-width="4" stroke-linecap="round"/>
+  
+  <!-- Subtle A shape in the prompt area -->
+  <path d="M55 45L62 60L69 45" stroke="#818CF8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M57 54H67" stroke="#818CF8" stroke-width="2" stroke-linecap="round"/>
+</svg>
