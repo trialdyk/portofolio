@@ -49,8 +49,6 @@ useSeoMeta({
             </span>
           </div>
 
-          <hr />
-
           <!-- Contact Info -->
           <h2 class="text-lg font-bold text-slate-800 dark:text-slate-200 mb-4">Contact Information</h2>
           
@@ -68,8 +66,6 @@ useSeoMeta({
               </div>
             </div>
           </div>
-
-          <hr />
 
           <!-- Social Links -->
           <h2 class="text-lg font-bold text-slate-800 dark:text-slate-200 mb-4">Find Me On</h2>
@@ -93,8 +89,6 @@ useSeoMeta({
               <span class="text-sm font-medium text-slate-700 dark:text-slate-300">{{ social.handle }}</span>
             </a>
           </div>
-
-          <hr />
 
           <!-- Email CTA -->
           <h2 class="text-lg font-bold text-slate-800 dark:text-slate-200 mb-4">Send Me a Message</h2>
