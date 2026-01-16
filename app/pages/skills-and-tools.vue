@@ -13,7 +13,10 @@ const yearsOfExperience = skillsConfig.yearsOfExperience()
 const tocItems = [
   { id: 'roles', label: 'What I Do', icon: 'heroicons:briefcase-20-solid' },
   { id: 'tech-stack', label: 'Tech Stack', icon: 'heroicons:code-bracket-20-solid' },
-  { id: 'detail', label: 'Detail & Summary', icon: 'heroicons:list-bullet-20-solid' },
+  { id: 'programming-languages', label: 'Languages', icon: 'heroicons:code-bracket-square-20-solid' },
+  { id: 'frameworks', label: 'Frameworks', icon: 'heroicons:cube-20-solid' },
+  { id: 'databases', label: 'Databases', icon: 'heroicons:circle-stack-20-solid' },
+  { id: 'tools', label: 'Tools', icon: 'heroicons:wrench-screwdriver-20-solid' },
 ]
 
 // Active section tracking
@@ -187,29 +190,10 @@ onMounted(() => {
             </div>
           </section>
 
-          <!-- Detail and Summary Section -->
-          <section id="detail" class="scroll-mt-24">
-            <h2 class="text-xl font-bold text-slate-800 dark:text-slate-200 mb-2">Detail and Summary</h2>
+          <!-- Programming Languages -->
+          <section id="programming-languages" class="scroll-mt-24">
+            <h2 class="text-xl font-bold text-slate-800 dark:text-slate-200 mb-2">Programming Languages</h2>
             <p class="text-slate-600 dark:text-slate-400 mb-4">
-              I represent all data in labels to make it easier to read. 
-              The <strong class="text-accent-600 dark:text-accent-400">underline indicator</strong> shows how often I use the related item.
-            </p>
-            
-            <!-- Legend -->
-            <div class="flex flex-wrap gap-3 mb-6">
-              <div class="inline-flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
-                <span class="inline-block w-6 h-0.5 bg-accent-500 rounded-full"></span>
-                <span>Frequently Used</span>
-              </div>
-              <div class="inline-flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
-                <span class="inline-block w-3 h-0.5 bg-accent-400 rounded-full"></span>
-                <span>Occasionally</span>
-              </div>
-            </div>
-
-            <!-- Programming Languages -->
-            <h3 class="text-base font-semibold text-slate-700 dark:text-slate-300 mt-6 mb-2">Programming Languages</h3>
-            <p class="text-sm text-slate-500 dark:text-slate-400 mb-3">
               Languages I use for writing code, from frontend to backend.
             </p>
             <div class="flex flex-wrap gap-2">
@@ -217,24 +201,21 @@ onMounted(() => {
                 v-for="skill in skillsConfig.programmingLanguages" 
                 :key="skill.name"
                 :class="clsx(
-                  'relative inline-flex items-center gap-2 rounded-md border px-2.5 py-1.5',
+                  'inline-flex items-center gap-2 rounded-md border px-2.5 py-1.5',
                   'bg-slate-50 border-slate-200',
                   'dark:bg-slate-800/50 dark:border-slate-700'
                 )"
               >
                 <Icon v-if="skill.icon" :name="skill.icon" :class="clsx('h-4 w-4', skill.iconColor)" />
                 <span class="text-sm font-medium text-slate-700 dark:text-slate-300">{{ skill.name }}</span>
-                <!-- Left-aligned underline indicator -->
-                <span 
-                  class="absolute bottom-0 left-2 h-0.5 rounded-full bg-accent-500"
-                  :style="{ width: `calc(${skill.indicator}% - 16px)` }"
-                />
               </div>
             </div>
+          </section>
 
-            <!-- Frameworks -->
-            <h3 class="text-base font-semibold text-slate-700 dark:text-slate-300 mt-6 mb-2">Frameworks & Libraries</h3>
-            <p class="text-sm text-slate-500 dark:text-slate-400 mb-3">
+          <!-- Frameworks -->
+          <section id="frameworks" class="scroll-mt-24">
+            <h2 class="text-xl font-bold text-slate-800 dark:text-slate-200 mb-2">Frameworks & Libraries</h2>
+            <p class="text-slate-600 dark:text-slate-400 mb-4">
               My go-to frameworks for rapid development.
             </p>
             <div class="flex flex-wrap gap-2">
@@ -242,23 +223,21 @@ onMounted(() => {
                 v-for="skill in skillsConfig.frameworks" 
                 :key="skill.name"
                 :class="clsx(
-                  'relative inline-flex items-center gap-2 rounded-md border px-2.5 py-1.5',
+                  'inline-flex items-center gap-2 rounded-md border px-2.5 py-1.5',
                   'bg-slate-50 border-slate-200',
                   'dark:bg-slate-800/50 dark:border-slate-700'
                 )"
               >
                 <Icon v-if="skill.icon" :name="skill.icon" :class="clsx('h-4 w-4', skill.iconColor)" />
                 <span class="text-sm font-medium text-slate-700 dark:text-slate-300">{{ skill.name }}</span>
-                <span 
-                  class="absolute bottom-0 left-2 h-0.5 rounded-full bg-accent-500"
-                  :style="{ width: `calc(${skill.indicator}% - 16px)` }"
-                />
               </div>
             </div>
+          </section>
 
-            <!-- Databases -->
-            <h3 class="text-base font-semibold text-slate-700 dark:text-slate-300 mt-6 mb-2">Databases</h3>
-            <p class="text-sm text-slate-500 dark:text-slate-400 mb-3">
+          <!-- Databases -->
+          <section id="databases" class="scroll-mt-24">
+            <h2 class="text-xl font-bold text-slate-800 dark:text-slate-200 mb-2">Databases</h2>
+            <p class="text-slate-600 dark:text-slate-400 mb-4">
               Database technologies for data storage and management.
             </p>
             <div class="flex flex-wrap gap-2">
@@ -266,23 +245,21 @@ onMounted(() => {
                 v-for="skill in skillsConfig.databases" 
                 :key="skill.name"
                 :class="clsx(
-                  'relative inline-flex items-center gap-2 rounded-md border px-2.5 py-1.5',
+                  'inline-flex items-center gap-2 rounded-md border px-2.5 py-1.5',
                   'bg-slate-50 border-slate-200',
                   'dark:bg-slate-800/50 dark:border-slate-700'
                 )"
               >
                 <Icon v-if="skill.icon" :name="skill.icon" :class="clsx('h-4 w-4', skill.iconColor)" />
                 <span class="text-sm font-medium text-slate-700 dark:text-slate-300">{{ skill.name }}</span>
-                <span 
-                  class="absolute bottom-0 left-2 h-0.5 rounded-full bg-accent-500"
-                  :style="{ width: `calc(${skill.indicator}% - 16px)` }"
-                />
               </div>
             </div>
+          </section>
 
-            <!-- Tools -->
-            <h3 class="text-base font-semibold text-slate-700 dark:text-slate-300 mt-6 mb-2">Softwares & Tools</h3>
-            <p class="text-sm text-slate-500 dark:text-slate-400 mb-3">
+          <!-- Tools -->
+          <section id="tools" class="scroll-mt-24">
+            <h2 class="text-xl font-bold text-slate-800 dark:text-slate-200 mb-2">Softwares & Tools</h2>
+            <p class="text-slate-600 dark:text-slate-400 mb-4">
               Development tools and software I use daily.
             </p>
             <div class="flex flex-wrap gap-2">
@@ -290,17 +267,13 @@ onMounted(() => {
                 v-for="skill in skillsConfig.tools" 
                 :key="skill.name"
                 :class="clsx(
-                  'relative inline-flex items-center gap-2 rounded-md border px-2.5 py-1.5',
+                  'inline-flex items-center gap-2 rounded-md border px-2.5 py-1.5',
                   'bg-slate-50 border-slate-200',
                   'dark:bg-slate-800/50 dark:border-slate-700'
                 )"
               >
                 <Icon v-if="skill.icon" :name="skill.icon" :class="clsx('h-4 w-4', skill.iconColor)" />
                 <span class="text-sm font-medium text-slate-700 dark:text-slate-300">{{ skill.name }}</span>
-                <span 
-                  class="absolute bottom-0 left-2 h-0.5 rounded-full bg-accent-500"
-                  :style="{ width: `calc(${skill.indicator}% - 16px)` }"
-                />
               </div>
             </div>
           </section>
