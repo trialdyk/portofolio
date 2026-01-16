@@ -135,7 +135,7 @@ onMounted(() => {
                 v-for="role in skillsConfig.roles"
                 :key="role.title"
                 :class="clsx(
-                  'flex items-start gap-4 rounded-lg p-4 border',
+                  'flex items-center gap-4 rounded-lg p-4 border',
                   'bg-accent-50/50 border-accent-200/50',
                   'dark:bg-accent-900/10 dark:border-accent-800/30'
                 )"
