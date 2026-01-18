@@ -4,12 +4,13 @@
 const STORAGE_KEY = 'portfolio_easter_egg_shown'
 const TRIGGER_DELAY = 15000 // 15 seconds
 
-export const useWebsiteDestroyer = () => {
-  const showToast = ref(false)
-  const isDestroying = ref(false)
-  const showModal = ref(false)
-  const destructionPhase = ref(0)
+// Singleton state - shared across all usages
+const showToast = ref(false)
+const isDestroying = ref(false)
+const destructionPhase = ref(0) // 0: none, 1: chaos, 2: gravity
+let initialized = false
 
+export const useWebsiteDestroyer = () => {
   const isClient = import.meta.client
 
   // Check if toast was already shown before
@@ -31,48 +32,40 @@ export const useWebsiteDestroyer = () => {
     isDestroying.value = true
     showToast.value = false
 
-    // Phase 1: Glitch (0-500ms)
+    // Phase 1: Chaos
     destructionPhase.value = 1
     
     setTimeout(() => {
-      // Phase 2: Chaos (500ms-2s)
+      // Phase 2: Gravity
       destructionPhase.value = 2
-    }, 500)
-
-    setTimeout(() => {
-      // Phase 3: Gravity (2s)
-      destructionPhase.value = 3
-    }, 2000)
-
-    setTimeout(() => {
-      // Phase 4: Crack (3s)
-      destructionPhase.value = 4
-    }, 3000)
-
-    setTimeout(() => {
-      // Phase 5: Show modal (3.5s)
-      destructionPhase.value = 5
-      showModal.value = true
-    }, 3500)
+    }, 1000)
   }
 
-  // Keyboard handler - always listen for B key
+  // Keyboard handler
   const handleKeyDown = (event: KeyboardEvent) => {
-    if (event.key.toLowerCase() === 'b' && !isDestroying.value) {
+    // Only trigger on 'b' or 'B' key, not when typing in inputs
+    const target = event.target as HTMLElement
+    const isInput = target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable
+    
+    if (event.key.toLowerCase() === 'b' && !isDestroying.value && !isInput) {
+      console.log('🎪 Website Destroyer: B key pressed!')
       triggerDestruction()
     }
   }
 
-  // Initialize the Easter egg
+  // Initialize the Easter egg (should only run once)
   const initEasterEgg = () => {
-    if (!isClient) return
+    if (!isClient || initialized) return
+    initialized = true
+    
+    console.log('🎪 Website Destroyer: Initialized!')
 
-    // Always add keyboard listener (B key always works)
+    // Always add keyboard listener
     window.addEventListener('keydown', handleKeyDown)
 
     // Only show toast on first visit
     if (!wasToastShown()) {
-      const timer = setTimeout(() => {
+      setTimeout(() => {
         if (!isDestroying.value) {
           showToast.value = true
           markToastShown()
@@ -85,17 +78,12 @@ export const useWebsiteDestroyer = () => {
           }, 10000)
         }
       }, TRIGGER_DELAY)
-
-      // Cleanup function
-      return () => {
-        clearTimeout(timer)
-        window.removeEventListener('keydown', handleKeyDown)
-      }
     }
 
-    // Cleanup function (no timer to clear)
+    // Cleanup function
     return () => {
       window.removeEventListener('keydown', handleKeyDown)
+      initialized = false
     }
   }
 
@@ -104,28 +92,22 @@ export const useWebsiteDestroyer = () => {
     showToast.value = false
   }
 
-  // Refresh page
-  const refreshPage = () => {
-    if (isClient) {
-      window.location.reload()
-    }
-  }
-
   // Reset Easter egg (for testing)
   const resetEasterEgg = () => {
     if (!isClient) return
     localStorage.removeItem(STORAGE_KEY)
+    isDestroying.value = false
+    destructionPhase.value = 0
+    initialized = false
   }
 
   return {
     showToast,
     isDestroying,
-    showModal,
     destructionPhase,
     initEasterEgg,
     triggerDestruction,
     dismissToast,
-    refreshPage,
     resetEasterEgg
   }
 }
