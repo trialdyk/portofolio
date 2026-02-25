@@ -1,6 +1,4 @@
-import { Redis } from '@upstash/redis'
-
-const redis = Redis.fromEnv()
+import { serverSupabaseClient } from '#supabase/server'
 
 export interface Reactions {
   '😲': number
@@ -26,31 +24,45 @@ export default defineEventHandler(async (event) => {
   const emoji = body.emoji as EmojiKey
   
   if (!slug) {
-    throw createError({
-      statusCode: 400,
-      message: 'Slug is required'
-    })
+    throw createError({ statusCode: 400, message: 'Slug is required' })
   }
   
   if (!emoji || !validEmojis.includes(emoji)) {
-    throw createError({
-      statusCode: 400,
-      message: 'Valid emoji is required (😲, 😊, 😢, 👍)'
-    })
+    throw createError({ statusCode: 400, message: 'Valid emoji is required (😲, 😊, 😢, 👍)' })
   }
 
   try {
-    const key = `blog:reactions:${slug}`
-    let reactions = await redis.get<Reactions>(key) || { ...defaultReactions }
+    const supabase = await serverSupabaseClient<any>(event)
     
-    // Increment the reaction count
-    reactions[emoji] = (reactions[emoji] || 0) + 1
+    // 1. Increment this specific reaction using our Postgres function.
+    // Casting to any to avoid strict TS type generator issues without a types file.
+    const { error: rpcError } = await (supabase.rpc as any)('increment_blog_reaction', { 
+      base_slug: slug, 
+      base_emoji: emoji 
+    })
+
+    if (rpcError) throw rpcError
     
-    await redis.set(key, reactions)
+    // 2. Fetch the summary of ALL reactions for this slug so the UI updates
+    const { data: allReactions, error } = await supabase
+      .from('blog_reactions')
+      .select('emoji, count')
+      .eq('slug', slug)
+      
+    if (error) throw error
+
+    const reactions: Reactions = { ...defaultReactions }
+    if (allReactions) {
+      (allReactions as { emoji: string, count: number }[]).forEach(row => {
+        if (validEmojis.includes(row.emoji as EmojiKey)) {
+          reactions[row.emoji as EmojiKey] = row.count
+        }
+      })
+    }
     
     return { reactions }
   } catch (error) {
-    console.warn('Upstash Redis not configured, reactions not saved')
+    console.warn('Supabase error, reactions not saved:', error)
     return { reactions: defaultReactions }
   }
 })

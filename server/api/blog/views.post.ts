@@ -1,6 +1,4 @@
-import { Redis } from '@upstash/redis'
-
-const redis = Redis.fromEnv()
+import { serverSupabaseClient } from '#supabase/server'
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event)
@@ -14,10 +12,14 @@ export default defineEventHandler(async (event) => {
   }
 
   try {
-    const views = await redis.incr(`blog:views:${slug}`)
-    return { views }
+    const supabase = await serverSupabaseClient<any>(event)
+    const { data, error } = await (supabase.rpc as any)('increment_blog_view', { base_slug: slug })
+    
+    if (error) throw error
+    
+    return { views: data }
   } catch (error) {
-    console.warn('Upstash Redis not configured, views not incremented')
+    console.warn('Supabase error, views not incremented:', error)
     return { views: 1 }
   }
 })

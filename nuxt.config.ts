@@ -14,8 +14,13 @@ export default defineNuxtConfig({
     '@nuxtjs/mdc',
     '@vueuse/motion/nuxt',
     '@nuxt/icon',
-    '@nuxtjs/sitemap'
+    '@nuxtjs/sitemap',
+    '@nuxtjs/supabase'
   ],
+
+  supabase: {
+    redirect: false, // Important: Don't force user to login page, this is anonymous tracking
+  },
 
   // Sitemap - auto-generates from pages
   sitemap: {},

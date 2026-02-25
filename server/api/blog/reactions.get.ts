@@ -1,6 +1,4 @@
-import { Redis } from '@upstash/redis'
-
-const redis = Redis.fromEnv()
+import { serverSupabaseClient } from '#supabase/server'
 
 export interface Reactions {
   '😲': number
@@ -28,10 +26,26 @@ export default defineEventHandler(async (event) => {
   }
 
   try {
-    const reactions = await redis.get<Reactions>(`blog:reactions:${slug}`) || defaultReactions
+    const supabase = await serverSupabaseClient<any>(event)
+    const { data, error } = await supabase
+      .from('blog_reactions')
+      .select('emoji, count')
+      .eq('slug', slug)
+      
+    if (error) throw error
+
+    const reactions: Reactions = { ...defaultReactions }
+    if (data) {
+      (data as { emoji: string, count: number }[]).forEach(row => {
+        if (row.emoji in reactions) {
+          reactions[row.emoji as keyof Reactions] = row.count
+        }
+      })
+    }
+    
     return { reactions }
   } catch (error) {
-    console.warn('Upstash Redis not configured, returning default reactions')
+    console.warn('Supabase error, returning default reactions:', error)
     return { reactions: defaultReactions }
   }
 })
