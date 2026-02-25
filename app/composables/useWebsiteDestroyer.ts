@@ -36,9 +36,9 @@ export const useWebsiteDestroyer = () => {
     destructionPhase.value = 1
     
     setTimeout(() => {
-      // Phase 2: Gravity
+      // Phase 2: Gravity (Explosion)
       destructionPhase.value = 2
-    }, 1000)
+    }, 2800)
   }
 
   // Keyboard handler

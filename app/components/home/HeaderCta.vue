@@ -2,6 +2,13 @@
 defineProps<{
   isFree?: boolean
 }>()
+
+const scrollToStory = () => {
+  if (import.meta.client) {
+    const el = document.getElementById('my-story')
+    if (el) el.scrollIntoView({ behavior: 'smooth' })
+  }
+}
 </script>
 
 <template>
@@ -11,10 +18,10 @@ defineProps<{
     :enter="{ x: 0, opacity: 1, transition: { delay: 400 } }"
     class="flex flex-col gap-3 md:flex-row md:gap-4"
   >
-    <!-- Get in Touch - Premium animated button with rotating border -->
+    <!-- See My Story - Premium animated button with rotating border -->
     <NuxtLink
       to="/contact"
-      class="cta-button group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-xl px-6 py-3 font-bold text-white"
+      class="cta-button group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-xl px-6 py-3 font-bold text-white cursor-pointer"
     >
       <!-- Rotating gradient border -->
       <span class="absolute inset-[-2px] rounded-xl bg-gradient-conic animate-border-rotate" />
@@ -33,8 +40,8 @@ defineProps<{
       
       <!-- Content -->
       <span class="relative z-10 flex items-center gap-2">
-        <Icon name="heroicons:chat-bubble-left-right-20-solid" class="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
-        <span>Get in Touch</span>
+        <Icon name="heroicons:chat-bubble-left-ellipsis-20-solid" class="h-5 w-5 transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-12" />
+        <span>Get in touch</span>
         <Icon name="heroicons:arrow-right-20-solid" class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
       </span>
     </NuxtLink>

@@ -138,10 +138,36 @@ onMounted(() => {
     <div class="pb-20" id="page-content">
       <div class="content-wrapper">
         <div class="page-content max-w-3xl">
-          <p>
+          <p class="mb-8">
             I started my professional career as a web developer around 2016. In 2021, I resigned from my job 
             to focus on completing college matters while taking on some freelance projects.
           </p>
+
+          <!-- Interactive Story Prompt Banner -->
+          <NuxtLink 
+            to="/journey"
+            class="group relative block w-full p-6 sm:p-8 rounded-2xl overflow-hidden bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-accent-500/50 dark:hover:border-accent-500/50 transition-all duration-500 hover:shadow-[0_10px_30px_rgba(var(--color-primary-500),0.15)] dark:hover:shadow-[0_0_30px_rgba(var(--color-primary-500),0.15)] mb-12"
+          >
+            <!-- Background effects -->
+            <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-accent-500/10 dark:from-accent-900/30 via-transparent dark:via-slate-900 to-transparent dark:to-black transition-opacity duration-500 opacity-90 group-hover:opacity-100" />
+            <div class="absolute -right-10 -top-10 w-40 h-40 bg-accent-600/10 dark:bg-accent-600/20 blur-3xl rounded-full group-hover:bg-accent-500/20 dark:group-hover:bg-accent-500/30 transition-colors duration-500" />
+
+            <div class="relative z-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+              <div class="flex items-center gap-5">
+                <div class="flex-shrink-0 w-14 h-14 rounded-full bg-accent-500/10 dark:bg-accent-500/10 border border-accent-500/20 dark:border-accent-500/30 flex items-center justify-center text-accent-600 dark:text-accent-400 group-hover:scale-110 group-hover:rotate-12 transition-transform duration-500">
+                  <Icon name="heroicons:rocket-launch-solid" class="w-7 h-7" />
+                </div>
+                <div>
+                  <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-1 group-hover:text-accent-600 dark:group-hover:text-accent-300 transition-colors">Want a more immersive look?</h3>
+                  <p class="text-slate-600 dark:text-slate-400 text-sm sm:text-base">Explore my timeline through an interactive Space Journey ✨</p>
+                </div>
+              </div>
+              
+              <div class="flex-shrink-0 flex items-center justify-center px-5 py-2.5 rounded-full bg-accent-500/10 dark:bg-white/10 text-accent-700 dark:text-white font-medium group-hover:bg-accent-500/20 dark:group-hover:bg-white/20 backdrop-blur-md border border-accent-500/20 dark:border-white/10 transition-colors">
+                Launch <Icon name="heroicons:arrow-right-20-solid" class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+              </div>
+            </div>
+          </NuxtLink>
 
           <!-- Table of Contents - Mobile -->
           <div class="lg:hidden mt-6 mb-6">

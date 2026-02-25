@@ -11,102 +11,19 @@ definePageMeta({
   layout: 'default'
 })
 
-const supabase = useSupabaseClient<any>()
-
-// State
-const isLoading = ref(true)
-const totalViews = ref(0)
-const uniqueVisitors = ref(0)
-const topPages = ref<{ path: string, count: number }[]>([])
-const topBrowsers = ref<{ name: string, count: number }[]>([])
-const topOS = ref<{ name: string, count: number }[]>([])
-
-// Fetch Data directly from Supabase via client
-const fetchStats = async () => {
-  isLoading.value = true
-  try {
-    // 1. Fetch all raw data using the actual schema columns
-    const { data, error } = await supabase
-      .from('page_views')
-      .select('page_path, visitor_id, user_agent')
-      
-    if (error) throw error
-    if (!data) return
-
-    totalViews.value = data.length
-
-    // Define typing based on Supabase actual schema
-    const views = data as { page_path: string, visitor_id: string, user_agent: string }[]
-
-    // Calculate Unique Visitors
-    const uniqueSessions = new Set(views.map(v => v.visitor_id))
-    uniqueVisitors.value = uniqueSessions.size
-
-    // Calculate Top Pages
-    const pageCounts = views.reduce((acc: Record<string, number>, view) => {
-      acc[view.page_path] = (acc[view.page_path] || 0) + 1
-      return acc
-    }, {})
-    
-    topPages.value = Object.entries(pageCounts)
-      .map(([path, count]) => ({ path, count }))
-      .sort((a, b) => b.count - a.count)
-      .slice(0, 5)
-
-    // Helper to parse simple browser and OS from User Agent string
-    const getBrowser = (ua: string) => {
-      if (!ua) return 'Unknown';
-      if (ua.includes('Chrome') && !ua.includes('Edge')) return 'Chrome';
-      if (ua.includes('Safari') && !ua.includes('Chrome')) return 'Safari';
-      if (ua.includes('Firefox')) return 'Firefox';
-      if (ua.includes('Edge') || ua.includes('Edg/')) return 'Edge';
-      return 'Unknown';
-    }
-
-    const getOS = (ua: string) => {
-      if (!ua) return 'Unknown';
-      if (ua.includes('Windows') || ua.includes('Win')) return 'Windows';
-      if (ua.includes('like Mac')) return 'iOS';
-      if (ua.includes('Mac')) return 'Mac OS';
-      if (ua.includes('Android')) return 'Android';
-      if (ua.includes('Linux')) return 'Linux';
-      return 'Unknown';
-    }
-
-    // Calculate Top Browsers
-    const browserCounts = views.reduce((acc: Record<string, number>, view) => {
-      const b = getBrowser(view.user_agent)
-      acc[b] = (acc[b] || 0) + 1
-      return acc
-    }, {})
-    
-    topBrowsers.value = Object.entries(browserCounts)
-      .map(([name, count]) => ({ name, count }))
-      .sort((a, b) => b.count - a.count)
-      .slice(0, 5)
-
-    // Calculate Top OS
-    const osCounts = views.reduce((acc: Record<string, number>, view) => {
-      const o = getOS(view.user_agent)
-      acc[o] = (acc[o] || 0) + 1
-      return acc
-    }, {})
-    
-    topOS.value = Object.entries(osCounts)
-      .map(([name, count]) => ({ name, count }))
-      .sort((a, b) => b.count - a.count)
-      .slice(0, 5)
-
-  } catch (err) {
-    console.error('Failed to fetch stats:', err)
-  } finally {
-    isLoading.value = false
-  }
-}
-
-onMounted(() => {
-  fetchStats()
+// Fetch Data from Backend API securely
+const { data: stats, pending: isLoading, error } = await useFetch('/api/statistics', {
+  lazy: true,
+  server: false // Prevent SSR hydration mismatch on load, run on client
 })
+
+// Computed properties for the template
+const totalViews = computed(() => stats.value?.totalViews || 0)
+const uniqueVisitors = computed(() => stats.value?.uniqueVisitors || 0)
+const topPages = computed(() => stats.value?.topPages || [])
+const topBrowsers = computed(() => stats.value?.topBrowsers || [])
+const topOS = computed(() => stats.value?.topOS || [])
+
 </script>
 
 <template>
