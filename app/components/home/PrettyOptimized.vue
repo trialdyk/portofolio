@@ -9,7 +9,17 @@
 
     <div class="relative z-10 flex flex-col gap-8 lg:flex-row lg:gap-16">
       <div class="flex-1 lg:py-12">
-        <h2 
+        <div
+          v-motion
+          :initial="{ x: -20, opacity: 0 }"
+          :visibleOnce="{ x: 0, opacity: 1, transition: { delay: 50 } }"
+          class="mb-3 flex items-center gap-2.5 text-xs font-semibold uppercase tracking-widest text-accent-600 dark:text-accent-400"
+        >
+          <span class="tabular-nums">03</span>
+          <span class="h-px w-8 rounded-full bg-accent-500/50" />
+          <span>Always Learning</span>
+        </div>
+        <h2
           v-motion
           :initial="{ x: -20, opacity: 0 }"
           :visibleOnce="{ x: 0, opacity: 1, transition: { delay: 100 } }"

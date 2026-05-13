@@ -14,31 +14,21 @@ useSeoMeta({
     
 
     <!-- Quote Section -->
-    <div class="-mt-12 mb-12 md:mb-24 md:mt-0">
+    <div class="mb-16 md:mb-24">
       <HomeQuote />
     </div>
-    
-    <!-- Clean & Intuitive Section -->
-    <section class="mb-12 lg:mb-24">
-      <HomeCleanIntuitive />
-    </section>
-    
-    <!-- Detail Oriented Section -->
-    <section class="mb-12 lg:mb-24">
+
+    <!-- Bento Grid Section -->
+    <section class="mb-16 lg:mb-28">
       <HomeDetailOriented />
     </section>
-    
-    <!-- Pretty & Optimized Section -->
-    <section class="mb-12 lg:mb-24">
-      <HomePrettyOptimized />
+
+    <!-- Bento Grid Showcase (Navigation Hub) -->
+    <section class="mb-16 lg:mb-28">
+      <HomeShowcase />
     </section>
 
     <!-- Interactive Playground Section -->
     <HomeInteractivePlayground />
-
-    <!-- Bento Grid Showcase (Navigation Hub) -->
-    <section>
-      <HomeShowcase />
-    </section>
   </div>
 </template>

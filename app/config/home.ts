@@ -8,6 +8,7 @@ export const homeConfig = {
 
   hero: {
     greeting: 'hi!',
+    availableForWork: true,
     name: {
       first: 'Tri',
       highlighted: 'Aldy'
@@ -31,5 +32,41 @@ export const homeConfig = {
     { name: 'Golang', icon: 'skill-icons:golang', iconColor: 'text-[#06B6D4]' },
     { name: 'PostgreSQL', icon: 'simple-icons:postgresql', iconColor: 'text-[#4169E1]' },
     { name: 'Antigravity', icon: 'vscode-icons:file-type-gemini', iconColor: 'text-accent-500' },
-  ]
+  ],
+
+  codeSnippets: [
+    {
+      filename: 'developer.ts',
+      lines: [
+        { text: 'const developer = {',    color: 'text-violet-600 dark:text-violet-400' },
+        { text: '  name: "Tri Aldy",',    color: 'text-emerald-600 dark:text-green-400' },
+        { text: '  role: "Fullstack",',   color: 'text-emerald-600 dark:text-green-400' },
+        { text: '  stack: ["Vue","Go"],', color: 'text-amber-600 dark:text-amber-400'   },
+        { text: '  coffee: true ☕',      color: 'text-pink-600 dark:text-pink-400'     },
+        { text: '};',                     color: 'text-violet-600 dark:text-violet-400' },
+      ],
+    },
+    {
+      filename: 'analyst.ts',
+      lines: [
+        { text: 'class SystemAnalyst {', color: 'text-violet-600 dark:text-violet-400' },
+        { text: '  analyze(problem) {',  color: 'text-sky-600 dark:text-sky-400'       },
+        { text: '    const solution =',  color: 'text-emerald-600 dark:text-green-400' },
+        { text: '      this.solve(p);',  color: 'text-emerald-600 dark:text-green-400' },
+        { text: '    return solution;',  color: 'text-amber-600 dark:text-amber-400'   },
+        { text: '  }',                   color: 'text-violet-600 dark:text-violet-400' },
+      ],
+    },
+    {
+      filename: 'mobile.dart',
+      lines: [
+        { text: 'class MobileApp {',     color: 'text-violet-600 dark:text-violet-400' },
+        { text: '  final platforms = [', color: 'text-sky-600 dark:text-sky-400'       },
+        { text: '    "Android",',        color: 'text-emerald-600 dark:text-green-400' },
+        { text: '    "iOS",',            color: 'text-emerald-600 dark:text-green-400' },
+        { text: '  ];',                  color: 'text-amber-600 dark:text-amber-400'   },
+        { text: '}',                     color: 'text-violet-600 dark:text-violet-400' },
+      ],
+    },
+  ],
 }

@@ -11,9 +11,7 @@ import { homeConfig } from '~/config/home'
   >
     <!-- Sparkle decorations -->
     <div class="sparkle-container">
-      <span class="sparkle sparkle-1" />
-      <span class="sparkle sparkle-2" />
-      <span class="sparkle sparkle-3" />
+      <UiSparkleEffect color="purple" />
     </div>
 
     <p class="mb-2.5 text-sm text-slate-600 dark:text-slate-400 flex items-center gap-2">
@@ -65,66 +63,8 @@ import { homeConfig } from '~/config/home'
   overflow: visible;
 }
 
-/* Sparkle base */
-.sparkle {
-  position: absolute;
-  width: 8px;
-  height: 8px;
-}
-
-.sparkle::before,
-.sparkle::after {
-  content: '';
-  position: absolute;
-  background: linear-gradient(135deg, #a855f7, #8b5cf6);
-  border-radius: 2px;
-}
-
-.sparkle::before {
-  top: 50%;
-  left: 0;
-  right: 0;
-  height: 2px;
-  transform: translateY(-50%);
-}
-
-.sparkle::after {
-  left: 50%;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  transform: translateX(-50%);
-}
-
-@keyframes sparkle-blink {
-  0%, 100% {
-    opacity: 0;
-    transform: scale(0) rotate(0deg);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1) rotate(180deg);
-  }
-}
-
-.sparkle-1 {
-  top: -10px;
-  left: 20%;
-  animation: sparkle-blink 2s ease-in-out infinite;
-  animation-delay: 0s;
-}
-
-.sparkle-2 {
-  top: 50%;
-  right: -10px;
-  animation: sparkle-blink 2s ease-in-out infinite;
-  animation-delay: 0.7s;
-}
-
-.sparkle-3 {
-  bottom: -10px;
-  left: 60%;
-  animation: sparkle-blink 2s ease-in-out infinite;
-  animation-delay: 1.4s;
-}
+/* Sparkle position overrides for tech stack */
+:deep(.sparkle-1) { top: -10px; left: 20%; }
+:deep(.sparkle-2) { top: 50%; right: -10px; }
+:deep(.sparkle-3) { bottom: -10px; left: 60%; }
 </style>

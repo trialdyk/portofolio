@@ -1,128 +1,168 @@
 <script setup lang="ts">
-// Isometric Tech Stack SVG Component
+// Isometric Tech Stack — Pure SVG with proper 3D cuboids
 </script>
 
 <template>
-  <div class="relative flex h-[350px] w-full items-center justify-center">
+  <div class="relative flex h-[400px] w-full items-center justify-center">
     <!-- Glow behind the stack -->
-    <div class="absolute h-48 w-48 rounded-full bg-accent-500/10 opacity-70 blur-3xl mix-blend-screen animate-pulse dark:bg-accent-500/20" style="animation-duration: 4s;"></div>
-    
-    <!-- 3D Transform Container -->
-    <div class="isometric-container relative h-[300px] w-[280px]">
-      
-      <!-- Top Layer: Frontend (Vue) -->
-      <div class="layer layer-frontend absolute top-[20%] left-0 right-0 h-[80px] rounded-xl border border-emerald-400/40 bg-emerald-500/10 shadow-[0_10px_30px_-10px_rgba(52,211,153,0.3)] backdrop-blur-sm group cursor-pointer transition-all duration-300">
-        <!-- Top Face (Gloss) -->
-        <div class="absolute inset-x-0 -top-2 h-4 rounded-t-xl bg-gradient-to-b from-white/20 to-transparent dark:from-white/10"></div>
-        <div class="absolute inset-0 flex items-center justify-center gap-3">
-          <Icon name="simple-icons:vuedotjs" class="h-8 w-8 text-emerald-500 transition-transform duration-300 group-hover:scale-110 drop-shadow-md" />
-          <span class="font-bold tracking-wider text-emerald-600 dark:text-emerald-400">FRONTEND</span>
-        </div>
-      </div>
+    <div class="absolute h-56 w-56 rounded-full bg-accent-500/15 opacity-70 blur-3xl animate-pulse dark:bg-accent-500/20" style="animation-duration: 4s;" />
 
-      <!-- Connecting Lines Frontend -> Backend -->
-      <svg class="absolute top-[40%] left-1/2 h-[60px] w-2 -translate-x-1/2 overflow-visible" viewBox="0 0 8 60">
-        <!-- Static background line -->
-        <line x1="4" y1="0" x2="4" y2="60" stroke="#94a3b8" stroke-width="2" stroke-opacity="0.2" stroke-linecap="round" />
-        <!-- Animated data pulse -->
-        <line x1="4" y1="0" x2="4" y2="60" stroke="#34d399" stroke-width="2" stroke-linecap="round" class="animate-pulse-down shadow-[0_0_8px_#34d399]" />
-      </svg>
+    <svg viewBox="0 0 400 440" class="relative z-10 h-full w-full max-w-md" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <!-- Frontend gradients (Emerald) -->
+        <linearGradient id="iso-fe-top" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#a7f3d0" />
+          <stop offset="100%" stop-color="#10b981" />
+        </linearGradient>
+        <linearGradient id="iso-fe-left" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#10b981" />
+          <stop offset="100%" stop-color="#047857" />
+        </linearGradient>
+        <linearGradient id="iso-fe-right" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#34d399" />
+          <stop offset="100%" stop-color="#065f46" />
+        </linearGradient>
 
-      <!-- Middle Layer: Backend (Go) -->
-      <div class="layer layer-backend absolute top-[50%] left-0 right-0 h-[80px] rounded-xl border border-sky-400/40 bg-sky-500/10 shadow-[0_10px_30px_-10px_rgba(56,189,248,0.3)] backdrop-blur-sm group cursor-pointer transition-all duration-300">
-        <div class="absolute inset-x-0 -top-2 h-4 rounded-t-xl bg-gradient-to-b from-white/20 to-transparent dark:from-white/10"></div>
-        <div class="absolute inset-0 flex items-center justify-center gap-3">
-          <Icon name="simple-icons:go" class="h-10 w-10 text-sky-500 transition-transform duration-300 group-hover:scale-110 drop-shadow-md" />
-          <span class="font-bold tracking-wider text-sky-600 dark:text-sky-400">BACKEND</span>
-        </div>
-      </div>
+        <!-- Backend gradients (Sky) -->
+        <linearGradient id="iso-be-top" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#bae6fd" />
+          <stop offset="100%" stop-color="#0ea5e9" />
+        </linearGradient>
+        <linearGradient id="iso-be-left" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#0ea5e9" />
+          <stop offset="100%" stop-color="#0369a1" />
+        </linearGradient>
+        <linearGradient id="iso-be-right" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#38bdf8" />
+          <stop offset="100%" stop-color="#075985" />
+        </linearGradient>
 
-      <!-- Connecting Lines Backend -> Database -->
-      <svg class="absolute top-[70%] left-1/2 h-[60px] w-2 -translate-x-1/2 overflow-visible" viewBox="0 0 8 60">
-        <line x1="4" y1="0" x2="4" y2="60" stroke="#94a3b8" stroke-width="2" stroke-opacity="0.2" stroke-linecap="round" />
-        <line x1="4" y1="0" x2="4" y2="60" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" class="animate-pulse-down shadow-[0_0_8px_#38bdf8]" style="animation-delay: 1s;" />
-      </svg>
+        <!-- Database gradients (Indigo) -->
+        <linearGradient id="iso-db-top" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#c7d2fe" />
+          <stop offset="100%" stop-color="#6366f1" />
+        </linearGradient>
+        <linearGradient id="iso-db-left" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#6366f1" />
+          <stop offset="100%" stop-color="#3730a3" />
+        </linearGradient>
+        <linearGradient id="iso-db-right" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#818cf8" />
+          <stop offset="100%" stop-color="#312e81" />
+        </linearGradient>
 
-      <!-- Bottom Layer: Database (PostgreSQL) -->
-      <div class="layer layer-database absolute top-[80%] left-0 right-0 h-[80px] rounded-xl border border-indigo-400/40 bg-indigo-500/10 shadow-[0_10px_30px_-10px_rgba(99,102,241,0.3)] backdrop-blur-sm group cursor-pointer transition-all duration-300">
-        <div class="absolute inset-x-0 -top-2 h-4 rounded-t-xl bg-gradient-to-b from-white/20 to-transparent dark:from-white/10"></div>
-        <div class="absolute inset-0 flex items-center justify-center gap-3">
-          <Icon name="simple-icons:postgresql" class="h-8 w-8 text-indigo-500 transition-transform duration-300 group-hover:scale-110 drop-shadow-md" />
-          <span class="font-bold tracking-wider text-indigo-600 dark:text-indigo-400">DATABASE</span>
-        </div>
-      </div>
-      
-    </div>
-    
-    <!-- Floating Orbit particles -->
-    <div class="absolute top-12 right-10 h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_10px_#34d399] animate-float-slow"></div>
-    <div class="absolute bottom-16 left-8 h-3 w-3 rounded-full bg-indigo-400 shadow-[0_0_12px_#6366f1] animate-float-slow" style="animation-delay: 1.5s;"></div>
-    <div class="absolute top-1/2 left-4 h-1.5 w-1.5 rounded-full bg-sky-400 shadow-[0_0_8px_#38bdf8] animate-float-slow" style="animation-delay: 2.5s;"></div>
+        <!-- Soft glow for data packets -->
+        <filter id="iso-packet-glow" x="-100%" y="-100%" width="300%" height="300%">
+          <feGaussianBlur stdDeviation="2" result="blur" />
+          <feMerge>
+            <feMergeNode in="blur" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+
+        <!-- Floor shadow blur -->
+        <filter id="iso-shadow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="6" />
+        </filter>
+      </defs>
+
+      <!-- Floor shadow -->
+      <ellipse cx="200" cy="420" rx="115" ry="9" fill="#0f172a" opacity="0.25" filter="url(#iso-shadow)" />
+
+      <!-- ================ DATABASE Layer (bottom) ================ -->
+      <g class="iso-layer iso-database">
+        <!-- Right face -->
+        <polygon points="280,345 200,380 200,402 280,367" fill="url(#iso-db-right)" stroke="rgba(0,0,0,0.15)" stroke-width="0.5" stroke-linejoin="round" />
+        <!-- Left face -->
+        <polygon points="120,345 200,380 200,402 120,367" fill="url(#iso-db-left)" stroke="rgba(0,0,0,0.15)" stroke-width="0.5" stroke-linejoin="round" />
+        <!-- Top face -->
+        <polygon points="200,310 280,345 200,380 120,345" fill="url(#iso-db-top)" stroke="rgba(255,255,255,0.45)" stroke-width="0.8" stroke-linejoin="round" />
+        <!-- Front edge highlight -->
+        <line x1="200" y1="310" x2="200" y2="380" stroke="rgba(255,255,255,0.2)" stroke-width="0.5" />
+        <!-- Label -->
+        <text x="200" y="349" text-anchor="middle" fill="white" font-size="11" font-weight="700" letter-spacing="2.5" font-family="ui-sans-serif, system-ui">DATABASE</text>
+        <text x="200" y="362" text-anchor="middle" fill="rgba(255,255,255,0.75)" font-size="7.5" letter-spacing="1.5" font-family="ui-sans-serif, system-ui">PostgreSQL</text>
+      </g>
+
+      <!-- Connection: Backend → Database -->
+      <line x1="200" y1="272" x2="200" y2="310" stroke="rgba(56,189,248,0.35)" stroke-width="1" stroke-dasharray="2,2" />
+      <circle r="3" fill="#38bdf8" filter="url(#iso-packet-glow)" opacity="0">
+        <animate attributeName="cy" from="272" to="310" dur="2s" begin="0s" repeatCount="indefinite" />
+        <animate attributeName="cx" values="200;200" dur="2s" begin="0s" repeatCount="indefinite" />
+        <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.9;1" dur="2s" begin="0s" repeatCount="indefinite" />
+      </circle>
+
+      <!-- ================ BACKEND Layer (middle) ================ -->
+      <g class="iso-layer iso-backend">
+        <polygon points="280,215 200,250 200,272 280,237" fill="url(#iso-be-right)" stroke="rgba(0,0,0,0.15)" stroke-width="0.5" stroke-linejoin="round" />
+        <polygon points="120,215 200,250 200,272 120,237" fill="url(#iso-be-left)" stroke="rgba(0,0,0,0.15)" stroke-width="0.5" stroke-linejoin="round" />
+        <polygon points="200,180 280,215 200,250 120,215" fill="url(#iso-be-top)" stroke="rgba(255,255,255,0.45)" stroke-width="0.8" stroke-linejoin="round" />
+        <line x1="200" y1="180" x2="200" y2="250" stroke="rgba(255,255,255,0.2)" stroke-width="0.5" />
+        <text x="200" y="219" text-anchor="middle" fill="white" font-size="11" font-weight="700" letter-spacing="2.5" font-family="ui-sans-serif, system-ui">BACKEND</text>
+        <text x="200" y="232" text-anchor="middle" fill="rgba(255,255,255,0.75)" font-size="7.5" letter-spacing="1.5" font-family="ui-sans-serif, system-ui">Go · API</text>
+      </g>
+
+      <!-- Connection: Frontend → Backend -->
+      <line x1="200" y1="142" x2="200" y2="180" stroke="rgba(52,211,153,0.35)" stroke-width="1" stroke-dasharray="2,2" />
+      <circle r="3" fill="#34d399" filter="url(#iso-packet-glow)" opacity="0">
+        <animate attributeName="cy" from="142" to="180" dur="2s" begin="0.7s" repeatCount="indefinite" />
+        <animate attributeName="cx" values="200;200" dur="2s" begin="0.7s" repeatCount="indefinite" />
+        <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.9;1" dur="2s" begin="0.7s" repeatCount="indefinite" />
+      </circle>
+
+      <!-- ================ FRONTEND Layer (top) ================ -->
+      <g class="iso-layer iso-frontend">
+        <polygon points="280,85 200,120 200,142 280,107" fill="url(#iso-fe-right)" stroke="rgba(0,0,0,0.15)" stroke-width="0.5" stroke-linejoin="round" />
+        <polygon points="120,85 200,120 200,142 120,107" fill="url(#iso-fe-left)" stroke="rgba(0,0,0,0.15)" stroke-width="0.5" stroke-linejoin="round" />
+        <polygon points="200,50 280,85 200,120 120,85" fill="url(#iso-fe-top)" stroke="rgba(255,255,255,0.45)" stroke-width="0.8" stroke-linejoin="round" />
+        <line x1="200" y1="50" x2="200" y2="120" stroke="rgba(255,255,255,0.2)" stroke-width="0.5" />
+        <text x="200" y="89" text-anchor="middle" fill="white" font-size="11" font-weight="700" letter-spacing="2.5" font-family="ui-sans-serif, system-ui">FRONTEND</text>
+        <text x="200" y="102" text-anchor="middle" fill="rgba(255,255,255,0.75)" font-size="7.5" letter-spacing="1.5" font-family="ui-sans-serif, system-ui">Vue · Nuxt</text>
+      </g>
+
+      <!-- Floating ambient particles -->
+      <g>
+        <circle cx="60" cy="200" r="2" fill="#34d399" opacity="0">
+          <animate attributeName="cy" from="220" to="120" dur="5s" repeatCount="indefinite" />
+          <animate attributeName="opacity" values="0;0.7;0" dur="5s" repeatCount="indefinite" />
+        </circle>
+        <circle cx="340" cy="290" r="1.6" fill="#6366f1" opacity="0">
+          <animate attributeName="cy" from="320" to="200" dur="6s" begin="1.2s" repeatCount="indefinite" />
+          <animate attributeName="opacity" values="0;0.65;0" dur="6s" begin="1.2s" repeatCount="indefinite" />
+        </circle>
+        <circle cx="50" cy="360" r="1.5" fill="#38bdf8" opacity="0">
+          <animate attributeName="cy" from="385" to="285" dur="4.5s" begin="2.1s" repeatCount="indefinite" />
+          <animate attributeName="opacity" values="0;0.7;0" dur="4.5s" begin="2.1s" repeatCount="indefinite" />
+        </circle>
+        <circle cx="345" cy="160" r="1.4" fill="#a78bfa" opacity="0">
+          <animate attributeName="cy" from="180" to="80" dur="5.5s" begin="0.5s" repeatCount="indefinite" />
+          <animate attributeName="opacity" values="0;0.6;0" dur="5.5s" begin="0.5s" repeatCount="indefinite" />
+        </circle>
+      </g>
+    </svg>
   </div>
 </template>
 
 <style scoped>
-/* 3D Isometric Projection */
-.isometric-container {
-  transform: rotateX(50deg) rotateZ(-30deg) translate3d(0, 0, 0);
-  transform-style: preserve-3d;
+.iso-layer {
+  transform-origin: center;
+  transform-box: fill-box;
 }
 
-/* Base layer interactions */
-.layer {
-  transform-style: preserve-3d;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+.iso-frontend {
+  animation: iso-levitate 4s ease-in-out infinite alternate;
 }
-
-.layer:hover {
-  transform: translateZ(20px) scale(1.05);
-  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.2);
-}
-
-/* Levitation Animations */
-.layer-frontend {
-  animation: levitate 4s ease-in-out infinite alternate;
-  animation-delay: 0s;
-  z-index: 30;
-}
-
-.layer-backend {
-  animation: levitate 4s ease-in-out infinite alternate;
+.iso-backend {
+  animation: iso-levitate 4s ease-in-out infinite alternate;
   animation-delay: -1.3s;
-  z-index: 20;
 }
-
-.layer-database {
-  animation: levitate 4s ease-in-out infinite alternate;
+.iso-database {
+  animation: iso-levitate 4s ease-in-out infinite alternate;
   animation-delay: -2.6s;
-  z-index: 10;
 }
 
-@keyframes levitate {
-  0% { transform: translateZ(0px); }
-  100% { transform: translateZ(15px); }
-}
-
-/* Data pulse down lines */
-.animate-pulse-down {
-  stroke-dasharray: 20 60;
-  stroke-dashoffset: 80;
-  animation: dash-flow 2s linear infinite;
-}
-
-@keyframes dash-flow {
-  to {
-    stroke-dashoffset: 0;
-  }
-}
-
-/* Ambient particles */
-@keyframes float-ambient {
-  0%, 100% { transform: translateY(0) scale(1); opacity: 0.6; }
-  50% { transform: translateY(-30px) scale(1.2); opacity: 1; }
-}
-
-.animate-float-slow {
-  animation: float-ambient 5s ease-in-out infinite;
+@keyframes iso-levitate {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-4px); }
 }
 </style>

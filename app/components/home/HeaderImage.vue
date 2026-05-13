@@ -1,49 +1,19 @@
 <script setup lang="ts">
-// Multiple code snippets that rotate
-const codeSnippets = [
-  {
-    filename: 'developer.ts',
-    lines: [
-      { text: 'const developer = {', color: 'text-violet-600 dark:text-violet-400' },
-      { text: '  name: "Tri Aldy",', color: 'text-emerald-600 dark:text-green-400' },
-      { text: '  role: "Fullstack",', color: 'text-emerald-600 dark:text-green-400' },
-      { text: '  stack: ["Vue", "Go"],', color: 'text-amber-600 dark:text-amber-400' },
-      { text: '  coffee: true ☕', color: 'text-pink-600 dark:text-pink-400' },
-      { text: '};', color: 'text-violet-600 dark:text-violet-400' },
-    ]
-  },
-  {
-    filename: 'analyst.ts',
-    lines: [
-      { text: 'class SystemAnalyst {', color: 'text-violet-600 dark:text-violet-400' },
-      { text: '  analyze(problem) {', color: 'text-sky-600 dark:text-sky-400' },
-      { text: '    const solution =', color: 'text-emerald-600 dark:text-green-400' },
-      { text: '      this.solve(problem);', color: 'text-emerald-600 dark:text-green-400' },
-      { text: '    return solution;', color: 'text-amber-600 dark:text-amber-400' },
-      { text: '  }', color: 'text-violet-600 dark:text-violet-400' },
-    ]
-  },
-  {
-    filename: 'mobile.dart',
-    lines: [
-      { text: 'class MobileApp {', color: 'text-violet-600 dark:text-violet-400' },
-      { text: '  final platforms = [', color: 'text-sky-600 dark:text-sky-400' },
-      { text: '    "Android",', color: 'text-emerald-600 dark:text-green-400' },
-      { text: '    "iOS",', color: 'text-emerald-600 dark:text-green-400' },
-      { text: '  ];', color: 'text-amber-600 dark:text-amber-400' },
-      { text: '}', color: 'text-violet-600 dark:text-violet-400' },
-    ]
-  },
-]
+import { homeConfig } from '~/config/home'
+
+const codeSnippets = homeConfig.codeSnippets
 
 const currentSnippetIndex = ref(0)
 const currentLineIndex = ref(0)
 const showCursor = ref(true)
 const isTransitioning = ref(false)
 
+let lineInterval: ReturnType<typeof setInterval>
+let cursorInterval: ReturnType<typeof setInterval>
+
 onMounted(() => {
   // Animate through code lines
-  setInterval(() => {
+  lineInterval = setInterval(() => {
     if (codeSnippets[currentSnippetIndex.value] && currentLineIndex.value < codeSnippets[currentSnippetIndex.value]!.lines.length + 1) {
       currentLineIndex.value++
     } else {
@@ -56,11 +26,15 @@ onMounted(() => {
       }, 500)
     }
   }, 600)
-  
+
   // Blinking cursor
-  setInterval(() => {
+  cursorInterval = setInterval(() => {
     showCursor.value = !showCursor.value
   }, 500)
+})
+onUnmounted(() => {
+  clearInterval(lineInterval)
+  clearInterval(cursorInterval)
 })
 
 const currentSnippet = computed(() => codeSnippets[currentSnippetIndex.value] || codeSnippets[0])
@@ -140,7 +114,7 @@ const currentSnippet = computed(() => codeSnippets[currentSnippetIndex.value] ||
           :class="index < currentLineIndex ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'"
         >
           <span class="mr-3 w-4 text-right opacity-50">{{ index + 1 }}</span>
-          <span :class="line.color">{{ line.text }}</span>
+          <span :class="line.color" class="whitespace-pre">{{ line.text }}</span>
           <span 
             v-if="index === currentLineIndex - 1 && showCursor && currentLineIndex <= (currentSnippet?.lines.length || 0)" 
             class="ml-0.5 inline-block h-4 w-0.5 bg-accent-500 animate-pulse"

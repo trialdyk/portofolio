@@ -31,11 +31,21 @@ const toggleTheme = () => {
     <div class="max-w-6xl mx-auto">
       
       <!-- Section Header -->
-      <div class="text-center mb-10 pb-4 border-b border-slate-200 dark:border-slate-800">
+      <div
+        v-motion
+        :initial="{ opacity: 0, y: 24 }"
+        :visibleOnce="{ opacity: 1, y: 0, transition: { duration: 600 } }"
+        class="text-center mb-12"
+      >
+        <div class="mb-4 flex items-center justify-center gap-3 text-xs font-semibold uppercase tracking-widest text-accent-600 dark:text-accent-400">
+          <span class="h-px w-10 rounded-full bg-accent-500/40" />
+          <span>Try it yourself</span>
+          <span class="h-px w-10 rounded-full bg-accent-500/40" />
+        </div>
         <h2 class="text-3xl font-extrabold text-slate-800 dark:text-slate-100 md:text-5xl mb-4">
-          Interactive <span class="text-transparent bg-clip-text bg-gradient-to-r from-accent-500 to-fuchsia-500">Playground</span>
+          Interactive <span class="text-accent-500 dark:text-accent-400">Playground</span>
         </h2>
-        <p class="text-slate-600 dark:text-slate-400 text-lg">
+        <p class="text-slate-600 dark:text-slate-400 text-lg max-w-lg mx-auto">
           This portfolio isn't just a document; it's an experience. Go ahead, push some buttons.
         </p>
       </div>
@@ -48,9 +58,6 @@ const toggleTheme = () => {
           to="/journey"
           class="group relative flex flex-col justify-between p-8 rounded-3xl overflow-hidden bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-accent-500/50 dark:hover:border-accent-500/50 transition-all duration-500 hover:shadow-[0_10px_30px_rgba(var(--color-primary-500),0.15)] dark:hover:shadow-[0_0_30px_rgba(var(--color-primary-500),0.15)] hover:-translate-y-1"
         >
-          <!-- Deep space background layer -->
-          <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-accent-500/10 dark:from-accent-900/40 via-transparent dark:via-slate-900 to-transparent dark:to-black opacity-80 group-hover:opacity-100 transition-opacity duration-500" />
-          
           <div class="relative z-10">
             <div class="w-12 h-12 mb-6 rounded-2xl bg-accent-500/10 dark:bg-accent-500/20 border border-accent-500/20 dark:border-accent-500/30 flex items-center justify-center text-accent-600 dark:text-accent-400 group-hover:scale-110 group-hover:rotate-12 transition-transform duration-500">
               <Icon name="heroicons:rocket-launch-solid" class="w-6 h-6" />
@@ -71,9 +78,6 @@ const toggleTheme = () => {
           @click="toggleTheme"
           class="group relative flex flex-col justify-between p-8 rounded-3xl overflow-hidden bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-accent-500/50 dark:hover:border-accent-500/50 transition-all duration-500 hover:shadow-[0_10px_30px_rgba(var(--color-primary-500),0.15)] dark:hover:shadow-[0_0_30px_rgba(var(--color-primary-500),0.15)] hover:-translate-y-1 text-left"
         >
-          <!-- Light/Dark split background layer -->
-          <div class="absolute inset-0 bg-gradient-to-br from-slate-100 dark:from-slate-800 to-transparent dark:to-black opacity-80 group-hover:opacity-100 transition-opacity duration-500" />
-          <div class="absolute top-0 right-0 w-32 h-32 bg-accent-500/5 dark:bg-accent-500/10 blur-3xl rounded-full group-hover:bg-accent-500/10 dark:group-hover:bg-accent-500/20 transition-colors duration-500" />
 
           <div class="relative z-10">
             <div class="w-12 h-12 mb-6 rounded-2xl bg-accent-500/10 dark:bg-accent-500/20 border border-accent-500/20 dark:border-accent-500/30 flex items-center justify-center text-accent-600 dark:text-accent-400 group-hover:rotate-180 transition-transform duration-700">
@@ -95,8 +99,6 @@ const toggleTheme = () => {
           @click="handleDestroyerClick"
           class="group relative flex flex-col justify-between p-8 rounded-3xl overflow-hidden bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-accent-500/50 dark:hover:border-accent-500/50 transition-all duration-500 hover:shadow-[0_10px_30px_rgba(var(--color-primary-500),0.15)] dark:hover:shadow-[0_0_30px_rgba(var(--color-primary-500),0.15)] hover:-translate-y-1 text-left"
         >
-          <!-- Glitch/Hacker background layer -->
-          <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-accent-500/5 dark:from-accent-900/30 via-transparent dark:via-slate-900 to-transparent dark:to-black opacity-80 group-hover:opacity-100 transition-opacity duration-500" />
           
           <!-- Subtle scanline effect on hover -->
           <div class="absolute inset-0 opacity-0 group-hover:opacity-10 bg-[linear-gradient(transparent_50%,rgba(var(--color-primary-500),0.1)_50%)] dark:bg-[linear-gradient(transparent_50%,rgba(0,0,0,0.5)_50%)] bg-[length:100%_4px] pointer-events-none transition-opacity duration-300" />

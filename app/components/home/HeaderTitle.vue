@@ -6,8 +6,9 @@ const currentTitleIndex = ref(0)
 const isAnimating = ref(false)
 
 // Rotate titles every 3 seconds
+let titleInterval: ReturnType<typeof setInterval>
 onMounted(() => {
-  setInterval(() => {
+  titleInterval = setInterval(() => {
     isAnimating.value = true
     setTimeout(() => {
       currentTitleIndex.value = (currentTitleIndex.value + 1) % homeConfig.hero.titles.length
@@ -15,6 +16,7 @@ onMounted(() => {
     }, 300)
   }, 3000)
 })
+onUnmounted(() => clearInterval(titleInterval))
 
 const currentTitle = computed(() => homeConfig.hero.titles[currentTitleIndex.value])
 </script>
@@ -44,29 +46,27 @@ const currentTitle = computed(() => homeConfig.hero.titles[currentTitleIndex.val
       </div>
     </div>
     <span class="text-slate-700 dark:text-slate-300">
-      <span
+      <h1
         v-motion
         :initial="{ x: -32, opacity: 0 }"
         :enter="{ x: 0, opacity: 1, transition: { delay: 200 } }"
         class="mb-4 block text-[2rem] font-[1000] leading-none md:mb-6 md:text-6xl"
       >
-        I'm {{ homeConfig.hero.name.first }} 
+        I'm {{ homeConfig.hero.name.first }}
         <strong class="name-animated relative inline-block text-accent-600 dark:text-accent-500">
           {{ homeConfig.hero.name.highlighted }}
           <!-- Sparkles -->
-          <span class="sparkle sparkle-1" />
-          <span class="sparkle sparkle-2" />
-          <span class="sparkle sparkle-3" />
+          <UiSparkleEffect color="purple" />
         </strong>,
-      </span>
-      <h1
+      </h1>
+      <p
         v-motion
         :initial="{ x: -32, opacity: 0 }"
         :enter="{ x: 0, opacity: 1, transition: { delay: 300 } }"
         class="block max-w-xl text-base text-slate-600 md:text-xl dark:text-slate-400"
       >
         <span class="lowercase">a </span>
-        <strong 
+        <strong
           class="title-animated font-bold lowercase text-slate-700 dark:text-slate-300 inline-block"
           :class="isAnimating ? 'animate-slide-out' : 'animate-slide-in'"
         >
@@ -75,7 +75,7 @@ const currentTitle = computed(() => homeConfig.hero.titles[currentTitleIndex.val
         <span>
            {{ homeConfig.hero.tagline }}
         </span>
-      </h1>
+      </p>
     </span>
   </div>
 </template>
@@ -111,69 +111,10 @@ const currentTitle = computed(() => homeConfig.hero.titles[currentTitleIndex.val
   filter: drop-shadow(0 0 15px rgba(139, 92, 246, 0.5));
 }
 
-/* Sparkle effects */
-.sparkle {
-  position: absolute;
-  width: 6px;
-  height: 6px;
-  pointer-events: none;
-}
-
-.sparkle::before,
-.sparkle::after {
-  content: '';
-  position: absolute;
-  background: #a855f7;
-  border-radius: 2px;
-}
-
-.sparkle::before {
-  top: 50%;
-  left: 0;
-  right: 0;
-  height: 2px;
-  transform: translateY(-50%);
-}
-
-.sparkle::after {
-  left: 50%;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  transform: translateX(-50%);
-}
-
-@keyframes sparkle-anim {
-  0%, 100% {
-    opacity: 0;
-    transform: scale(0) rotate(0deg);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1) rotate(90deg);
-  }
-}
-
-.sparkle-1 {
-  top: -8px;
-  right: -4px;
-  animation: sparkle-anim 2s ease-in-out infinite;
-  animation-delay: 0s;
-}
-
-.sparkle-2 {
-  top: 50%;
-  right: -12px;
-  animation: sparkle-anim 2s ease-in-out infinite;
-  animation-delay: 0.6s;
-}
-
-.sparkle-3 {
-  bottom: -4px;
-  right: 30%;
-  animation: sparkle-anim 2s ease-in-out infinite;
-  animation-delay: 1.2s;
-}
+/* Sparkle position overrides for name highlight */
+:deep(.sparkle-1) { top: -8px; right: -4px; }
+:deep(.sparkle-2) { top: 50%; right: -12px; }
+:deep(.sparkle-3) { bottom: -4px; right: 30%; }
 
 /* Title slide animations */
 @keyframes slide-in {

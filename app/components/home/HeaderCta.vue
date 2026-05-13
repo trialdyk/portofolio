@@ -1,8 +1,4 @@
 <script setup lang="ts">
-defineProps<{
-  isFree?: boolean
-}>()
-
 const scrollToStory = () => {
   if (import.meta.client) {
     const el = document.getElementById('my-story')
@@ -33,10 +29,7 @@ const scrollToStory = () => {
       <span class="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/30 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
       
       <!-- Sparkle effects -->
-      <span class="sparkle sparkle-1" />
-      <span class="sparkle sparkle-2" />
-      <span class="sparkle sparkle-3" />
-      <span class="sparkle sparkle-4" />
+      <UiSparkleEffect color="white" :count="4" />
       
       <!-- Content -->
       <span class="relative z-10 flex items-center gap-2">
@@ -108,78 +101,9 @@ const scrollToStory = () => {
   animation: border-rotate 3s linear infinite;
 }
 
-/* Sparkle effects */
-.sparkle {
-  position: absolute;
-  width: 4px;
-  height: 4px;
-  background: white;
-  border-radius: 50%;
-  opacity: 0;
-  pointer-events: none;
-  z-index: 20;
-}
-
-.sparkle::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 8px;
-  height: 2px;
-  background: white;
-  transform: translate(-50%, -50%);
-  border-radius: 2px;
-}
-
-.sparkle::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 2px;
-  height: 8px;
-  background: white;
-  transform: translate(-50%, -50%);
-  border-radius: 2px;
-}
-
-@keyframes sparkle-anim {
-  0%, 100% {
-    opacity: 0;
-    transform: scale(0) rotate(0deg);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1) rotate(180deg);
-  }
-}
-
-.sparkle-1 {
-  top: 10%;
-  left: 15%;
-  animation: sparkle-anim 2s ease-in-out infinite;
-  animation-delay: 0s;
-}
-
-.sparkle-2 {
-  top: 20%;
-  right: 20%;
-  animation: sparkle-anim 2s ease-in-out infinite;
-  animation-delay: 0.5s;
-}
-
-.sparkle-3 {
-  bottom: 15%;
-  left: 25%;
-  animation: sparkle-anim 2s ease-in-out infinite;
-  animation-delay: 1s;
-}
-
-.sparkle-4 {
-  bottom: 25%;
-  right: 15%;
-  animation: sparkle-anim 2s ease-in-out infinite;
-  animation-delay: 1.5s;
-}
+/* Sparkle position overrides for CTA button */
+:deep(.sparkle-1) { top: 10%; left: 15%; }
+:deep(.sparkle-2) { top: 20%; right: 20%; }
+:deep(.sparkle-3) { bottom: 15%; left: 25%; }
+:deep(.sparkle-4) { bottom: 25%; right: 15%; }
 </style>

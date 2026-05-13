@@ -9,9 +9,21 @@ const quoteWords = computed(() => {
 
 <template>
   <div class="content-wrapper">
-    <div class="flex items-center justify-center py-8">
-      <blockquote 
-        class="relative max-w-xl text-center"
+    <!-- Eyebrow divider -->
+    <div
+      v-motion
+      :initial="{ opacity: 0 }"
+      :visibleOnce="{ opacity: 1, transition: { duration: 600 } }"
+      class="mb-2 flex items-center justify-center gap-3"
+    >
+      <span class="h-px w-12 rounded-full bg-slate-300 dark:bg-slate-700" />
+      <span class="text-xs font-semibold uppercase tracking-widest text-slate-400 dark:text-slate-500">My philosophy</span>
+      <span class="h-px w-12 rounded-full bg-slate-300 dark:bg-slate-700" />
+    </div>
+
+    <div class="flex items-center justify-center py-12 md:py-16">
+      <blockquote
+        class="relative max-w-2xl text-center"
       >
         <!-- Quote icon -->
         <Icon
@@ -19,16 +31,16 @@ const quoteWords = computed(() => {
           :initial="{ scale: 0, opacity: 0, rotate: -45 }"
           :visibleOnce="{ scale: 1, opacity: 1, rotate: 0, transition: { type: 'spring', delay: 100 } }"
           name="heroicons:chat-bubble-bottom-center-text-20-solid"
-          class="absolute -left-2 -top-2 h-8 w-8 text-slate-200 dark:text-slate-800"
+          class="absolute -left-3 -top-3 h-11 w-11 text-accent-300/50 dark:text-accent-500/30"
         />
-        
+
         <!-- Staggered word text -->
-        <p class="text-lg font-medium italic text-slate-700 dark:text-slate-300 min-h-[4rem] leading-relaxed">
-          <span 
+        <p class="text-xl md:text-2xl font-medium italic text-slate-700 dark:text-slate-300 leading-relaxed">
+          <span
             v-motion
             :initial="{ opacity: 0, y: 10 }"
             :visibleOnce="{ opacity: 1, y: 0, transition: { delay: 200 } }"
-            class="inline-block mr-1"
+            class="inline-block mr-1 not-italic font-serif text-3xl leading-none text-accent-500/70 dark:text-accent-400/60"
           >
             "
           </span>
@@ -42,22 +54,22 @@ const quoteWords = computed(() => {
           >
             {{ word }}
           </span>
-          <span 
+          <span
             v-motion
             :initial="{ opacity: 0, y: 10 }"
             :visibleOnce="{ opacity: 1, y: 0, transition: { delay: 200 + (quoteWords.length * 50) } }"
-            class="inline-block"
+            class="inline-block not-italic font-serif text-3xl leading-none text-accent-500/70 dark:text-accent-400/60"
           >
             "
           </span>
         </p>
-        
+
         <!-- Author -->
-        <footer 
+        <footer
           v-motion
           :initial="{ opacity: 0, y: 20 }"
           :visibleOnce="{ opacity: 1, y: 0, transition: { delay: 400 + (quoteWords.length * 50) } }"
-          class="mt-4 text-sm text-slate-500 dark:text-slate-400"
+          class="mt-6 text-sm font-medium tracking-wide text-slate-500 dark:text-slate-400"
         >
           — {{ homeConfig.quote.author }}
         </footer>

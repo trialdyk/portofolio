@@ -14,7 +14,7 @@
         :visibleOnce="{ opacity: 1, y: 0, transition: { duration: 600 } }"
         class="text-center mb-12 lg:mb-16"
       >
-        <h2 class="text-3xl md:text-4xl font-bold bg-gradient-to-r from-slate-800 to-slate-500 dark:from-white dark:to-slate-400 bg-clip-text text-transparent">
+        <h2 class="text-3xl md:text-4xl font-bold text-slate-800 dark:text-white">
           Explore My World
         </h2>
         <p class="mt-4 text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
@@ -31,11 +31,8 @@
           v-motion
           :initial="{ opacity: 0, scale: 0.95 }"
           :visibleOnce="{ opacity: 1, scale: 1, transition: { delay: 100 } }"
-          class="group relative md:col-span-2 overflow-hidden rounded-3xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 backdrop-blur-xl transition-all hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgba(139,92,246,0.3)] dark:hover:shadow-[0_20px_40px_-15px_rgba(139,92,246,0.15)] focus:outline-none focus:ring-2 focus:ring-accent-500 flex flex-col justify-between p-8"
+          class="group relative md:col-span-2 overflow-hidden rounded-3xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 backdrop-blur-xl transition-all hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgb(var(--color-primary-500)/0.3)] dark:hover:shadow-[0_20px_40px_-15px_rgb(var(--color-primary-500)/0.15)] focus:outline-none focus:ring-2 focus:ring-accent-500 flex flex-col justify-between p-8"
         >
-          <!-- Glass Reflective Overlay -->
-          <div class="absolute inset-0 bg-gradient-to-br from-white/40 to-white/0 dark:from-white/5 dark:to-white/0 pointer-events-none" />
-          
           <div class="relative z-10">
             <h3 class="text-2xl font-bold text-slate-800 dark:text-slate-200 group-hover:text-accent-600 dark:group-hover:text-accent-400 transition-colors">
               Featured Projects
@@ -78,7 +75,7 @@
           v-motion
           :initial="{ opacity: 0, scale: 0.95 }"
           :visibleOnce="{ opacity: 1, scale: 1, transition: { delay: 200 } }"
-          class="group relative overflow-hidden rounded-3xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 backdrop-blur-xl transition-all hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgba(139,92,246,0.3)] dark:hover:shadow-[0_20px_40px_-15px_rgba(139,92,246,0.15)] focus:outline-none focus:ring-2 focus:ring-accent-500 p-8 flex flex-col"
+          class="group relative overflow-hidden rounded-3xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 backdrop-blur-xl transition-all hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgb(var(--color-primary-500)/0.3)] dark:hover:shadow-[0_20px_40px_-15px_rgb(var(--color-primary-500)/0.15)] focus:outline-none focus:ring-2 focus:ring-accent-500 p-8 flex flex-col"
         >
           <div class="absolute inset-0 bg-gradient-to-br from-white/40 to-white/0 dark:from-white/5 dark:to-white/0 pointer-events-none" />
 
@@ -112,7 +109,7 @@
           v-motion
           :initial="{ opacity: 0, scale: 0.95 }"
           :visibleOnce="{ opacity: 1, scale: 1, transition: { delay: 300 } }"
-          class="group relative overflow-hidden rounded-3xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 backdrop-blur-xl transition-all hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgba(139,92,246,0.3)] dark:hover:shadow-[0_20px_40px_-15px_rgba(139,92,246,0.15)] focus:outline-none focus:ring-2 focus:ring-accent-500 p-8 flex flex-col"
+          class="group relative overflow-hidden rounded-3xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 backdrop-blur-xl transition-all hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgb(var(--color-primary-500)/0.3)] dark:hover:shadow-[0_20px_40px_-15px_rgb(var(--color-primary-500)/0.15)] focus:outline-none focus:ring-2 focus:ring-accent-500 p-8 flex flex-col"
         >
           <div class="absolute inset-0 bg-gradient-to-br from-white/40 to-white/0 dark:from-white/5 dark:to-white/0 pointer-events-none" />
 
@@ -156,7 +153,7 @@
           v-motion
           :initial="{ opacity: 0, scale: 0.95 }"
           :visibleOnce="{ opacity: 1, scale: 1, transition: { delay: 400 } }"
-          class="group relative overflow-hidden rounded-3xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 backdrop-blur-xl transition-all hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgba(139,92,246,0.3)] dark:hover:shadow-[0_20px_40px_-15px_rgba(139,92,246,0.15)] focus:outline-none focus:ring-2 focus:ring-accent-500 p-8 flex flex-col"
+          class="group relative overflow-hidden rounded-3xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 backdrop-blur-xl transition-all hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgb(var(--color-primary-500)/0.3)] dark:hover:shadow-[0_20px_40px_-15px_rgb(var(--color-primary-500)/0.15)] focus:outline-none focus:ring-2 focus:ring-accent-500 p-8 flex flex-col"
         >
           <div class="absolute inset-0 bg-gradient-to-br from-white/40 to-white/0 dark:from-white/5 dark:to-white/0 pointer-events-none" />
           
@@ -184,7 +181,7 @@
           v-motion
           :initial="{ opacity: 0, scale: 0.95 }"
           :visibleOnce="{ opacity: 1, scale: 1, transition: { delay: 500 } }"
-          class="group relative overflow-hidden rounded-3xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 backdrop-blur-xl transition-all hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgba(139,92,246,0.3)] dark:hover:shadow-[0_20px_40px_-15px_rgba(139,92,246,0.15)] focus:outline-none focus:ring-2 focus:ring-accent-500 p-8 flex flex-col"
+          class="group relative overflow-hidden rounded-3xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 backdrop-blur-xl transition-all hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgb(var(--color-primary-500)/0.3)] dark:hover:shadow-[0_20px_40px_-15px_rgb(var(--color-primary-500)/0.15)] focus:outline-none focus:ring-2 focus:ring-accent-500 p-8 flex flex-col"
         >
           <div class="absolute inset-0 bg-gradient-to-br from-white/40 to-white/0 dark:from-white/5 dark:to-white/0 pointer-events-none" />
           
